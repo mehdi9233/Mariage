@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariage Mehdi & Radhia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* Reset */
+body, html {
+  margin:0; padding:0; height:100%; font-family:'Playfair Display', serif; overflow:hidden;
+}
+
+/* Background marocain subtil */
+body {
+  background: linear-gradient(135deg, #5b1a1a, #1f4d3a);
+  position: relative;
+  display:flex; justify-content:center; align-items:center;
+}
+
+/* Porte arabe */
+.door {
+  width: 200px; height: 300px;
+  background: linear-gradient(145deg, #7b1c1c, #4a2f1c);
+  border: 5px solid #f2d28b;
+  border-radius: 0 0 50% 50% / 0 0 30% 30%;
+  position: relative;
+  cursor: pointer;
+  transition: transform 1.5s ease-in-out;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 0 30px rgba(0,0,0,0.6);
+}
+
+.door.open {
+  transform: rotateY(-120deg);
+}
+
+/* Text behind the door */
+.content {
+  position: absolute;
+  text-align: center;
+  color:#f2d28b;
+  opacity:0;
+  transition: opacity 1s ease 1.5s;
+}
+
+.content.show {
+  opacity:1;
+}
+
+h1 { font-size:2.5em; margin:0 0 10px; }
+p { margin:5px 0; font-size:1.1em; }
+
+/* Countdown style */
+#countdown {
+  margin-top:15px;
+  font-size:1.3em;
+  font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="door" id="door"></div>
+
+<div class="content" id="content">
+  <h1>Mehdi & Radhia</h1>
+  <p>📅 25 août 2027 à 19h</p>
+  <p>📍 Agadir, Maroc</p>
+  <div id="countdown">Chargement...</div>
+</div>
+
+<script>
+// Door click animation
+const door = document.getElementById('door');
+const content = document.getElementById('content');
+
+door.addEventListener('click', () => {
+  door.classList.add('open');
+  content.classList.add('show');
+});
+
+// Countdown
+const eventDate = new Date("2027-08-25T19:00:00");
+
+function updateCountdown(){
+  const now = new Date();
+  const diff = eventDate - now;
+  if(diff <=0){
+    document.getElementById('countdown').innerHTML = "✨ C’est le grand jour ✨";
+    return;
+  }
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff / (1000*60*60)) %24);
+  const m = Math.floor((diff / (1000*60)) %60);
+  const s = Math.floor((diff / 1000)%60);
+  document.getElementById('countdown').innerHTML = `⏳ ${d}j ${h}h ${m}m ${s}s`;
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+
+</body>
+</html>
