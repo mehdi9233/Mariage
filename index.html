@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariage Mehdi & Radhia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+<style>
+body {
+  margin:0;
+  font-family:'Playfair Display', serif;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.03),
+      rgba(255,255,255,0.03) 10px,
+      rgba(0,0,0,0.05) 10px,
+      rgba(0,0,0,0.05) 20px
+    ),
+    linear-gradient(135deg, #5b1a1a, #1f4d3a);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:100vh;
+}
+.card {
+  background: rgba(0,0,0,0.55);
+  padding:40px;
+  border-radius:20px;
+  text-align:center;
+  max-width:360px;
+  animation: fadeIn 2s ease;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+h1 { font-size:2.4em; margin-bottom:10px; color:#f2d28b; }
+h2 { font-size:1.4em; margin-bottom:20px; }
+p { margin:8px 0; font-size:1.05em; }
+#countdown { margin-top:20px; font-size:1.4em; color:#f2d28b; }
+.motif { margin:20px auto; width:120px; height:120px; border:3px solid #f2d28b; transform: rotate(45deg); }
+@keyframes fadeIn { from {opacity:0; transform: translateY(30px);} to {opacity:1; transform: translateY(0);} }
+iframe { margin-top:20px; border-radius:12px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>Mehdi & Radhia</h1>
+  <h2>💍 Se disent oui 💍</h2>
+  <div class="motif"></div>
+  <p><strong>📅 Date :</strong><br>25 août 2027 à 19h</p>
+  <p><strong>📍 Lieu :</strong><br>Agadir, Maroc</p>
+  <div id="countdown">Chargement...</div>
+  <iframe width="100%" height="80"
+    src="https://www.youtube.com/embed/1q8J6ZkP7Z4?autoplay=1&mute=1"
+    title="Maes - Rivoli"
+    frameborder="0"
+    allow="autoplay; encrypted-media">
+  </iframe>
+</div>
+<script>
+const eventDate = new Date("2027-08-25T19:00:00");
+function updateCountdown(){
+  const now = new Date();
+  const diff = eventDate - now;
+  if(diff <= 0){
+    document.getElementById("countdown").innerHTML = "✨ C’est le grand jour ✨";
+    return;
+  }
+  const d = Math.floor(diff / (1000*60*60*24));
+  const h = Math.floor((diff / (1000*60*60)) % 24);
+  const m = Math.floor((diff / (1000*60)) % 60);
+  const s = Math.floor((diff / 1000) % 60);
+  document.getElementById("countdown").innerHTML =
+    "⏳ " + d + "j " + h + "h " + m + "m " + s + "s";
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+</script>
+</body>
+</html>
